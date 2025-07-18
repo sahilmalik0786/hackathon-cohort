@@ -18,7 +18,7 @@
 import { Fluid } from '@whatisjery/react-fluid-distortion';
 import { EffectComposer } from '@react-three/postprocessing';
 import { Canvas, useLoader } from '@react-three/fiber';
-
+import image from '../assets/LTT_Logo.png'
 import * as THREE from "three";
 import { useTheme } from '../theme_provider/ThemeProvider';
 
@@ -73,7 +73,7 @@ const Scene = () => {
 
 
       <ImagePlane
-        url="src/assets/LTT_Logo.png"
+        url= {image}
         position={[0, 1, 0]}
         size={[1, 1]}
       />
