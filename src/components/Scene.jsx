@@ -21,6 +21,8 @@ import { Canvas, useLoader } from '@react-three/fiber';
 import image from '../assets/LTT_Logo.png'
 import * as THREE from "three";
 import { useTheme } from '../theme_provider/ThemeProvider';
+import Navbar from './Navbar';
+import { useMediaQuery } from 'react-responsive';
 
 
 
@@ -47,6 +49,9 @@ const Scene = () => {
   const intensity = DarkTheme ? '15' : '0.5'
   const force = DarkTheme ? 4 : 2
   const velocity = DarkTheme ? 0.90 : 0.99
+    const isMobile = useMediaQuery({
+    query: '(max-width:650px)'
+  })
 
   const config = {
     fluidColor: color,
@@ -60,7 +65,8 @@ const Scene = () => {
   return (
   
   <>
-  <div className='h-screen w-screen fixed inset-0 z-5 bg-primary-dark overflow-hidden pointer-events-none dark:bg-primary-light mix-blend-overlay'>
+  <Navbar />
+  <div className='h-screen w-screen fixed inset-0 z-5 bg-gradient-to-br from-neutral-700 to-primary-dark from-0% overflow-hidden pointer-events-none dark:bg-gradient-to-br dark:from-neutral-200 dark:to-neutral-50 dark:from-0% mix-blend-overlay'>
  
   </div>
   <Canvas
@@ -75,13 +81,14 @@ const Scene = () => {
 
       <ImagePlane
         url= {image}
-        position={[7, 3, 0]}
-        size={[1, 1]}
+        position={isMobile?[-1.4, 3.28, 0]:[-7.2,3.2,0]}
+        size={isMobile?[0.4,0.4]:[1,1]}
       />
 
       <EffectComposer >
 
-        <Fluid {...config} />
+    {!isMobile && <Fluid {...config} />}
+        
       </EffectComposer>
     </Canvas>
 

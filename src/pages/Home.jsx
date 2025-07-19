@@ -32,12 +32,12 @@ const Home = () => {
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
   useEffect(() => {
-    ScrollSmoother.create({
-      wrapper: wrapperRef.current,
-      content: contentRef.current,
-      smooth: 2,
-      effects: true,
-    });
+    // ScrollSmoother.create({
+    //   wrapper: wrapperRef.current,
+    //   content: contentRef.current,
+    //   smooth: 2,
+    //   effects: true,
+    // });
   }, []);
 
   useGSAP(() => {
@@ -55,6 +55,21 @@ const Home = () => {
       scale: 0.7,
       ease: 'power1.inOut'
     })
+
+    gsap.fromTo('.page2', {
+
+    
+      scale: 0.8,
+      
+    },{  scrollTrigger: {
+        trigger: '.page2',
+        markers: true,
+        start: 'top bottom ',
+        end: 'center 60%',
+        scrub: 0.4
+      },
+      scale:1,
+    })
   })
 
 
@@ -62,22 +77,20 @@ const Home = () => {
   return (
     <div ref={wrapperRef} className='relative   w-full  '>
       <div ref={contentRef} className=' w-full overlay  absolute z-0  overflow-x-hidden'  >
-        <button className='dark:bg-black dark:text-white bg-primary-light text-primary-dark' onClick={toggleTheme}>
-          theme
-        </button>
+      
         <div className=' w-full h-screen flex flex-col justify-end not-md:gap-10'>
-          <div className='w-full flex not-md:h-full h-1/2 md:p-10 not-md:flex-col  not-md:justify-end '>
+          <div className='w-full flex not-md:h-full h-fit md:p-10 not-md:flex-col md:mb-10 not-md:justify-end '>
             <div className='w-[55%]  rounded-xl flex flex-col not-md:mb-20 not-md:w-3/3'>
-              {!isMobile &&  <DottedLine thickness={4} color={lineColor} />}
+              {!isMobile &&  <DottedLine thickness={2} color={lineColor} />}
               <h1 className='text-2xl not-md:text-lg w-10/11 font-suisse text-white tracking-wide dark:text-black mt-1'>
 
-                 <span className='dark:text-red-800 text-red-400 font-bold'>BUILD</span> by tech nerds, for tech nerds. <br />
-                • Quality over quantity — every time.
+                 <span className='dark:text-red-800 text-red-400 font-bold'>BUILD</span> by tech <span className='text-blue-200 dark:text-blue-700'>nerds</span>, for tech nerds. <br />
+                 Quality over quantity — every time.
               </h1>
             </div>
             <div className='w-1/3 not-md:w-3/4 dark:bg-red-200/20 not-md:pl-10 pt-1'>
               <h1 className='text-3xl not-md:text-lg  font-suisse text-white tracking-wideest dark:text-black '>
-                <TextEffect data=" Upgrade your gear with tools that aren’t just cool — they’re Linus-tested. Join millions who trust LTT gear to build repair, and flex on cable management."
+                <TextEffect data="Upgrade your gear with tools that aren’t just cool — they’re Linus-tested. Join millions who trust LTT gear to build repair, and flex on cable management."
                   stagger={0.01}
                   duration={0.1}
                   posY={5}
@@ -86,8 +99,8 @@ const Home = () => {
             </div>
           </div>
           <div className='w-full '>
-            <h1 ref={test} className='md:text-[220px] text-7xl dark:text-black text-white md:w-full md:text-center  p-1.5  font-suisse not-md:mb-10'>
-              <TextEffect data="LTT-STORE.com"
+            <h1 ref={test} className='md:text-[18rem] text-7xl dark:text-black text-white md:w-full md:text-center  p-1.5  font-suisse not-md:mb-10'>
+              <TextEffect data="Lttstore.com"
                 stagger={0.05}
                 duration={0.6}
                 posY={100} />
@@ -96,7 +109,7 @@ const Home = () => {
 
         </div>
         <div className='w-screen h-screen page2  p-10'>
-
+              
           <div className='w-full h-full dark:bg-neutral-500 bg-neutral-700 rounded-md  mx-auto   p-12'>
 
           </div>

@@ -13,6 +13,8 @@ export default function DottedLine({ orientation = 'horizontal', length = '100%'
         ...common,
         ...style,
       }}
+       
+  
       
     />
   ) : (
@@ -24,6 +26,7 @@ export default function DottedLine({ orientation = 'horizontal', length = '100%'
         ...common,
         ...style,
       }}
+     
     />
   );
 }
