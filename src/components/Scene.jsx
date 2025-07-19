@@ -42,7 +42,7 @@ function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
 
 const Scene = () => {
 
-  const { DarkTheme } = useTheme()
+  const { DarkTheme,toggleTheme } = useTheme()
   const color = DarkTheme ? '#000000' : '#dadada'
   const intensity = DarkTheme ? '15' : '0.5'
   const force = DarkTheme ? 4 : 2
@@ -60,8 +60,8 @@ const Scene = () => {
   return (
   
   <>
-  <div className='h-screen w-screen fixed inset-0 z-1 bg-primary-dark overflow-hidden dark:bg-primary-light mix-blend-color'>
-
+  <div className='h-screen w-screen fixed inset-0 z-5 bg-primary-dark overflow-hidden pointer-events-none dark:bg-primary-light mix-blend-overlay'>
+ 
   </div>
   <Canvas
       style={{
@@ -69,12 +69,13 @@ const Scene = () => {
         top: 0,
         left: 0,
         pointerEvents: 'none',
+        zIndex:1
       }}>
 
 
       <ImagePlane
         url= {image}
-        position={[0, 1, 0]}
+        position={[7, 3, 0]}
         size={[1, 1]}
       />
 

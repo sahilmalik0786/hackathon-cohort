@@ -3,7 +3,19 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme{
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("/fonts/fonnts.com-Suisse_Intl_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tailwind CSS variables for font utilities */
+@theme {
+  --font-suisse: "SuisseIntl", sans-serif;
+     
     --color-primary-light: #f8f8f8;
     --color-primary-dark: #0a0a0a;
 }
+

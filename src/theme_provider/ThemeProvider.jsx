@@ -4,7 +4,7 @@
     const ThemeContext = createContext();
 
     export const ThemeProvider = ({ children }) => {
-      const [DarkTheme, setDarkTheme] = useState(false);
+      const [DarkTheme, setDarkTheme] = useState(true);
 
       const toggleTheme = () => {
         setDarkTheme((prev) => !prev 
