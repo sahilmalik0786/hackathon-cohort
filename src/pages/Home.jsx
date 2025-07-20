@@ -10,6 +10,8 @@ import { useEffect } from 'react'
 import TextEffect from '../components/TextEffect'
 import DottedLine from '../components/DottedLine'
 import { useMediaQuery } from 'react-responsive'
+import Section2 from '../components/homesections/Section2'
+import Section3 from '../components/homesections/Section3'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -47,7 +49,7 @@ const Home = () => {
 
       scrollTrigger: {
         trigger: '.page2',
-        markers: true,
+        // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
         scrub: 0.4
@@ -63,7 +65,21 @@ const Home = () => {
       
     },{  scrollTrigger: {
         trigger: '.page2',
-        markers: true,
+        // markers: true,
+        start: 'top bottom ',
+        end: 'center 60%',
+        scrub: 0.4
+      },
+      scale:1,
+    })
+     gsap.fromTo('.page3', {
+
+    
+      scale: 0.8,
+      
+    },{  scrollTrigger: {
+        trigger: '.page3',
+        // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
         scrub: 0.4
@@ -81,7 +97,7 @@ const Home = () => {
         <div className=' w-full h-screen flex flex-col justify-end not-md:gap-10'>
           <div className='w-full flex not-md:h-full h-fit md:p-10 not-md:flex-col md:mb-10 not-md:justify-end '>
             <div className='w-[55%]  rounded-xl flex flex-col not-md:mb-20 not-md:w-3/3'>
-              {!isMobile &&  <DottedLine thickness={2} color={lineColor} />}
+              {/* {!isMobile &&  <DottedLine thickness={2} color={lineColor} />} */}
               <h1 className='text-2xl not-md:text-lg w-10/11 font-suisse text-white tracking-wide dark:text-black mt-1'>
 
                  <span className='dark:text-red-800 text-red-400 font-bold'>BUILD</span> by tech <span className='text-blue-200 dark:text-blue-700'>nerds</span>, for tech nerds. <br />
@@ -108,12 +124,14 @@ const Home = () => {
           </div>
 
         </div>
-        <div className='w-screen h-screen page2  p-10'>
+        <div className='w-full h-screen page2  p-7'>
               
-          <div className='w-full h-full dark:bg-neutral-500 bg-neutral-700 rounded-md  mx-auto   p-12'>
-
-          </div>
+         <Section2 />
         </div>
+        <div className='w-full h-screen page3 p-7'>
+    <Section3 />
+        </div>
+        
       </div>
 
 

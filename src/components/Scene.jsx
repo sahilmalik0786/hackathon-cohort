@@ -23,6 +23,16 @@ import * as THREE from "three";
 import { useTheme } from '../theme_provider/ThemeProvider';
 import Navbar from './Navbar';
 import { useMediaQuery } from 'react-responsive';
+import Model from './Model';
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+
+gsap.registerPlugin(ScrollTrigger , useGSAP);
+
 
 
 
@@ -52,6 +62,7 @@ const Scene = () => {
     const isMobile = useMediaQuery({
     query: '(max-width:650px)'
   })
+  const modelRef = useRef()
 
   const config = {
     fluidColor: color,
@@ -62,6 +73,42 @@ const Scene = () => {
     force: force,
   }
 
+useEffect(() => {
+  if (!modelRef.current) return;
+
+  gsap.to(modelRef.current.rotation, {
+    y: 20,
+    // x:20,
+    // z:10,
+    // skewX:22,
+    duration:10,
+    repeat:-1,
+    yoyo:true,
+    ease:'power2.inOut'
+   
+    // scrollTrigger: {
+    //   trigger: '.page2',
+    //   start: 'top center',
+    //   end: 'bottom center',
+    //   // scrub: true,
+    //   markers:true,
+    // },
+  });
+
+  gsap.to(modelRef.current.position, {
+    x: 1.2,
+    y: 1.2,
+    z: 1.2,
+    scrollTrigger: {
+      trigger: '.page2',
+      start: 'top center',
+      end: 'bottom center',
+      scrub: true,
+     
+    },
+  });
+}, []);
+
   return (
   
   <>
@@ -70,6 +117,7 @@ const Scene = () => {
  
   </div>
   <Canvas
+  
       style={{
         position: 'fixed',
         top: 0,
@@ -77,8 +125,10 @@ const Scene = () => {
         pointerEvents: 'none',
         zIndex:1
       }}>
-
-
+       
+        {/* <ambientLight intensity={0.5}  /> */}
+   {/* <Model ref={modelRef} scale={1.5} position={[0, -1, 0]} /> */}
+    
       <ImagePlane
         url= {image}
         position={isMobile?[-1.4, 3.28, 0]:[-7.2,3.2,0]}
