@@ -1,18 +1,30 @@
 
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import { useTheme } from './theme_provider/ThemeProvider'
 
-const App = () => {
- const{DarkTheme} = useTheme()
+
+import Scene from './components/Scene';
+import { Outlet } from 'react-router-dom';
+import { useTheme } from './theme_provider/ThemeProvider';
+import ScrollToTop from './components/ScrollToTop';
+import TransitionProvider from './components/Transitionprovider';
+import Newsletter from './components/Newsletter';
+
+
+export default function AppLayout() {
+ 
+  const {DarkTheme} = useTheme()
 
   return (
-    <div className={`w-full h-screen ${DarkTheme && 'dark'} `}>
-   
-      <Home/>
-      
-    </div>
-  )
-}
+    <div className={`w-full h-screen  ${DarkTheme && 'dark'}`}>
 
-export default App
+  <TransitionProvider>
+
+      <Scene />
+      <Outlet />
+     
+      
+  </TransitionProvider>
+
+    </div>
+   
+  );
+}

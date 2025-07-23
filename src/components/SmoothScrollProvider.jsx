@@ -1,32 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { setLenis } from '../utils/lenisInstance'; // adjust path
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SmoothScrollProvider = ({ children }) => {
-  const lenisRef = useRef(null);
-
   useEffect(() => {
-    // Init Lenis
     const lenis = new Lenis({
       smooth: true,
       lerp: 0.06,
       direction: 'vertical',
     });
 
-    lenisRef.current = lenis;
+    setLenis(lenis); //
 
     function raf(time) {
       lenis.raf(time);
-      ScrollTrigger.update(); // Sync ScrollTrigger
+      ScrollTrigger.update();
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
 
-    // Set up ScrollTrigger scroller proxy
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
         return arguments.length ? lenis.scrollTo(value) : window.scrollY;
@@ -42,13 +39,11 @@ const SmoothScrollProvider = ({ children }) => {
       pinType: document.body.style.transform ? 'transform' : 'fixed',
     });
 
-
     ScrollTrigger.refresh();
 
-   
     return () => {
-     
       lenis.destroy();
+      setLenis(null);
     };
   }, []);
 

@@ -1,6 +1,5 @@
 
-import Scene from '../components/Scene'
-import { useTheme } from '../theme_provider/ThemeProvider'
+
 import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
 import gsap from 'gsap'
@@ -8,10 +7,13 @@ import ScrollTrigger from 'gsap/src/ScrollTrigger'
 import ScrollSmoother from 'gsap/src/ScrollSmoother'
 import { useEffect } from 'react'
 import TextEffect from '../components/TextEffect'
-import DottedLine from '../components/DottedLine'
+
 import { useMediaQuery } from 'react-responsive'
 import Section2 from '../components/homesections/Section2'
 import Section3 from '../components/homesections/Section3'
+import { useTrans } from '../components/Transitionprovider'
+import Newsletter from '../components/Newsletter'
+import NewsletterArchive from '../components/NewsletterArchive'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -23,23 +25,18 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 const Home = () => {
   const test = useRef()
   // gsap.registerPlugin(ScrollTrigger)
-  const { DarkTheme, toggleTheme } = useTheme()
-
-  const lineColor = DarkTheme ? "#000" : "#fff"
+  // const { DarkTheme, toggleTheme } = useTheme()
+  const { containerRef, goTo, animateIn } = useTrans();
+  
   const isMobile = useMediaQuery({
     query: '(max-width:650px)'
   })
 
-  // create the scrollSmoother before your scrollTriggers
-  const wrapperRef = useRef(null);
-  const contentRef = useRef(null);
+ 
+
   useEffect(() => {
     // ScrollSmoother.create({
-    //   wrapper: wrapperRef.current,
-    //   content: contentRef.current,
-    //   smooth: 2,
-    //   effects: true,
-    // });
+animateIn()
   }, []);
 
   useGSAP(() => {
@@ -60,48 +57,53 @@ const Home = () => {
 
     gsap.fromTo('.page2', {
 
-    
+
       scale: 0.8,
-      
-    },{  scrollTrigger: {
+
+    }, {
+      scrollTrigger: {
         trigger: '.page2',
         // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
         scrub: 0.4
       },
-      scale:1,
+      scale: 1,
     })
-     gsap.fromTo('.page3', {
+    gsap.fromTo('.page3', {
 
-    
+
       scale: 0.8,
-      
-    },{  scrollTrigger: {
+
+    }, {
+      scrollTrigger: {
         trigger: '.page3',
         // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
         scrub: 0.4
       },
-      scale:1,
+      scale: 1,
     })
   })
 
 
 
   return (
-    <div ref={wrapperRef} className='relative   w-full  '>
-      <div ref={contentRef} className=' w-full overlay  absolute z-0  overflow-x-hidden'  >
+    <>
+  
+    <div ref={containerRef} className='relative  w-full'>
       
+      <div  className=' w-full  absolute scrollbar-hide  overflow-x-hidden'  >
+
         <div className=' w-full h-screen flex flex-col justify-end not-md:gap-10'>
           <div className='w-full flex not-md:h-full h-fit md:p-10 not-md:flex-col md:mb-10 not-md:justify-end '>
             <div className='w-[55%]  rounded-xl flex flex-col not-md:mb-20 not-md:w-3/3'>
               {/* {!isMobile &&  <DottedLine thickness={2} color={lineColor} />} */}
               <h1 className='text-2xl not-md:text-lg w-10/11 font-suisse text-white tracking-wide dark:text-black mt-1'>
 
-                 <span className='dark:text-red-800 text-red-400 font-bold'>BUILD</span> by tech <span className='text-blue-200 dark:text-blue-700'>nerds</span>, for tech nerds. <br />
-                 Quality over quantity — every time.
+                <span className='dark:text-red-800 text-red-400 font-bold'>BUILD</span> by tech <span className='text-blue-200 dark:text-blue-700'>nerds</span>, for tech nerds. <br />
+                Quality over quantity — every time.
               </h1>
             </div>
             <div className='w-1/3 not-md:w-3/4 dark:bg-red-200/20 not-md:pl-10 pt-1'>
@@ -125,21 +127,23 @@ const Home = () => {
 
         </div>
         <div className='w-full h-screen page2  p-7'>
-              
-         <Section2 />
+
+          <Section2 />
         </div>
         <div className='w-full h-screen page3 p-7'>
-    <Section3 />
+          <Section3 />
         </div>
-        
+        <div className='scrollbar-hide'>
+          <NewsletterArchive />
+        </div>
+        <div>
+          <Newsletter />
+        </div>
       </div>
-
-
-
-
-      <Scene />
-
+     
+       
     </div>
+    </>
   )
 }
 

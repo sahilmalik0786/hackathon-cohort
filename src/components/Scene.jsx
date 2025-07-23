@@ -37,20 +37,7 @@ gsap.registerPlugin(ScrollTrigger , useGSAP);
 
 
 
-function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
-  const { DarkTheme } = useTheme()
-  const color = DarkTheme ? '#000000' : '#'
 
-  const texture = useLoader(THREE.TextureLoader, url);
-
-  return (
-    <mesh position={position} >
-      <planeGeometry args={size} />
-      <meshBasicMaterial map={texture} transparent color={color} />
-    </mesh>
-
-  );
-}
 
 const Scene = () => {
 
@@ -113,7 +100,7 @@ useEffect(() => {
   
   <>
   <Navbar />
-  <div className='h-screen w-screen fixed inset-0 z-5 bg-gradient-to-br from-neutral-700 to-primary-dark from-0% overflow-hidden pointer-events-none dark:bg-gradient-to-br dark:from-neutral-200 dark:to-neutral-50 dark:from-0% mix-blend-overlay'>
+  <div className={`h-screen w-screen fixed inset-0  bg-gradient-to-br from-neutral-700 to-primary-dark from-0% overflow-hidden pointer-events-none dark:bg-gradient-to-br dark:from-neutral-200 dark:to-neutral-50 dark:from-0% dark:mix-blend-normal`}>
  
   </div>
   <Canvas
@@ -123,17 +110,13 @@ useEffect(() => {
         top: 0,
         left: 0,
         pointerEvents: 'none',
-        zIndex:1
+        zIndex:100
       }}>
        
         {/* <ambientLight intensity={0.5}  /> */}
    {/* <Model ref={modelRef} scale={1.5} position={[0, -1, 0]} /> */}
     
-      <ImagePlane
-        url= {image}
-        position={isMobile?[-1.4, 3.28, 0]:[-7.2,3.2,0]}
-        size={isMobile?[0.4,0.4]:[1,1]}
-      />
+    
 
       <EffectComposer >
 

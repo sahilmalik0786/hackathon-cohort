@@ -7,6 +7,14 @@ import gsap from 'gsap'
 import { useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { Canvas, useLoader } from '@react-three/fiber'
+import * as THREE from "three";
+import image from '../assets/LTT_Logo.png'
+import { useMediaQuery } from 'react-responsive'
+import { EffectComposer } from '@react-three/postprocessing'
+import { Fluid } from '@whatisjery/react-fluid-distortion'
+
+
 
 gsap.registerPlugin(useGSAP)
 
@@ -14,7 +22,37 @@ const Navbar = () => {
     const [icon , setIcon] = useState('.sun')
   const {DarkTheme , toggleTheme} = useTheme()
   const moon = useRef()
+   const isMobile = useMediaQuery({
+    query: '(max-width:650px)'
+  })
+   const color = DarkTheme ? '#000000' : '#000000'
+  const intensity = DarkTheme ? '1' : '1'
+  const force = DarkTheme ? 4 : 2
+  const velocity = DarkTheme ? 0.90 : 0.99
   
+function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
+  const { DarkTheme } = useTheme()
+  const color = DarkTheme ? '#000000' : '#ff0000'
+
+  const texture = useLoader(THREE.TextureLoader, url);
+
+  return (
+    <mesh position={position} >
+      <planeGeometry args={size} />
+      <meshBasicMaterial map={texture} transparent color={color} />
+    </mesh>
+
+  );
+}
+  const config = {
+    fluidColor: color,
+    radius: 20,
+    intensity: intensity,
+    showBackground: false,
+    velocityDissipation: velocity,
+    force: force,
+  }
+
    useEffect(()=>{
     const i = DarkTheme? '.sun' :'.moon'
     setIcon(i)
@@ -33,13 +71,30 @@ const Navbar = () => {
  
 
   return (
-    <nav className='fixed top-10   w-full  p-3 flex items-center justify-between z-1'>
-        <div>
-            <h1 className='md:ml-36 md:text-2xl ml-14 text-sm'>
+    <nav className='fixed top-0   w-full   p-3 flex items-center justify-between z-1'>
+        <div className='flex items-center p-1'>
+          <Canvas className='rounded-full  '
+         style={{
+          width:isMobile?'40px':'80px',
+          height:isMobile?'40px':'80px'
+         }}
+          >
+              <ImagePlane
+                    url= {image}
+                    position={isMobile?[0,0,0]:[0,0,0]}
+                    size={isMobile?[7,7]:[7,7]}
+                  />
+                    <EffectComposer >
+                  
+                      {!isMobile && <Fluid {...config} />}
+                          
+                        </EffectComposer>
+          </Canvas>
+            <h1 className=' md:text-2xl dark:text-black text-red-400 text-sm'>
                 store.com
             </h1>
         </div>
-        <div className='flex gap-5'>
+        <div className='flex gap-5 not-md:gap-2'>
              <button className='dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark px-4 hover:shadow-sm dark:shadow-gray-700 shadow-black active:scale-95 cursor-pointer transition-all font-suisse font-normal tracking-wide py-1 rounded-lg not-md:text-xs'>
                 Shop Now
              </button>
