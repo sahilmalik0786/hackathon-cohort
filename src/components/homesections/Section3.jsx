@@ -97,7 +97,7 @@ const Section2 = () => {
       
 
         <div ref={productsSection} className="w-full  h-full flex flex-col gap-20 not-md:justify-center justify-end">
-          <div className="f-pro  not-md:flex-nowrap  overflow-x-scroll overflow-y-hidden items-center p-3 snap-x snap-mandatory  gap-2 not-md:shrink-0 flex justify-around">
+          <div className="f-pro  not-md:flex-nowrap  not-md:overflow-x-scroll overflow-y-hidden items-center p-3 snap-x snap-mandatory  gap-2 not-md:shrink-0 flex justify-around">
             {/* Attach each card’s ref via addProductRef */}
          {bestseller.map((e,i)=>{
           return <ProductsCard ref={addProductRef} data={e} db={'seller'} key={i}/>
@@ -121,7 +121,7 @@ const Section2 = () => {
                 </filter>
               </svg>
               {[...Array(2)].map((_, i) => (
-                <h1 key={i} className="text-8xl pr-8 py-2 dark:text-black text-white">
+                <h1 key={i} className="text-8xl not-md:text-3xl pr-8 dark:text-black text-white">
                   BEST-SELLER BEST-SELLER BEST-SELLER BEST-SELLER BEST-SELLER BEST-SELLER
                 </h1>
               ))}

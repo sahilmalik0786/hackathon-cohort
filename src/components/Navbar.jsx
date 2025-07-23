@@ -1,18 +1,18 @@
-import React from 'react'
+
 import { useTheme } from '../theme_provider/ThemeProvider'
-import { RiMoonFill } from '@remixicon/react'
-import { RiSunFill } from '@remixicon/react'
+import { RiMoonFill ,RiSunFill } from '@remixicon/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { useRef } from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { Canvas, useLoader } from '@react-three/fiber'
 import * as THREE from "three";
 import image from '../assets/LTT_Logo.png'
 import { useMediaQuery } from 'react-responsive'
 import { EffectComposer } from '@react-three/postprocessing'
 import { Fluid } from '@whatisjery/react-fluid-distortion'
+
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from "react";
+import { getLenis } from "../utils/lenisInstance"; 
 
 
 
@@ -22,6 +22,7 @@ const Navbar = () => {
     const [icon , setIcon] = useState('.sun')
   const {DarkTheme , toggleTheme} = useTheme()
   const moon = useRef()
+
    const isMobile = useMediaQuery({
     query: '(max-width:650px)'
   })
@@ -29,6 +30,9 @@ const Navbar = () => {
   const intensity = DarkTheme ? '1' : '1'
   const force = DarkTheme ? 4 : 2
   const velocity = DarkTheme ? 0.90 : 0.99
+   const navRef = useRef();
+ const lastScrollRef = useRef(0);
+  const [scrollDirection, setScrollDirection] = useState("up");
   
 function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
   const { DarkTheme } = useTheme()
@@ -57,6 +61,7 @@ function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
     const i = DarkTheme? '.sun' :'.moon'
     setIcon(i)
   })
+ 
   useGSAP(()=>{
     gsap.fromTo(icon,{
         y:10,
@@ -69,9 +74,9 @@ function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
     })
   },[icon])
  
-
+  const navigate = useNavigate()
   return (
-    <nav className='fixed top-0   w-full   p-3 flex items-center justify-between z-1'>
+    <nav ref={navRef} className='fixed top-0   w-full  h-28 p-3 flex items-center justify-between z-1'>
         <div className='flex items-center p-1'>
           <Canvas className='rounded-full  '
          style={{
@@ -95,7 +100,7 @@ function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
             </h1>
         </div>
         <div className='flex gap-5 not-md:gap-2'>
-             <button className='dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark px-4 hover:shadow-sm dark:shadow-gray-700 shadow-black active:scale-95 cursor-pointer transition-all font-suisse font-normal tracking-wide py-1 rounded-lg not-md:text-xs'>
+             <button onClick={()=>navigate('/products') } className='dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark px-4 hover:shadow-sm dark:shadow-gray-700 shadow-black active:scale-95 cursor-pointer transition-all font-suisse font-normal tracking-wide py-1 rounded-lg not-md:text-xs'>
                 Shop Now
              </button>
               <button className='  flex items-center cursor-pointer mr-2' onClick={toggleTheme}>

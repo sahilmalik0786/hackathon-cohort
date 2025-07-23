@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import ProductDetails from '../pages/ProductDetails';
 import Login from '../pages/Login';
 import Signin from '../pages/Signin';
+import Products from '../pages/Products';
 
 // import About from '../pages/About'; // example page
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path:'/signin',
         element:<Signin />
       },
+      {
+        path:'/products',
+        element:<Products />
+      }
 
       // add more nested routes here
     ],

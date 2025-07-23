@@ -3,22 +3,22 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { useGSAP } from '@gsap/react'
-import { bestproducts , bestseller} from '../services/productsData/screwdrivers.js'
+import { bestproducts , bestseller, products} from '../services/productsData/screwdrivers.js'
 import { RiAccountBox2Fill } from '@remixicon/react'
-import { useTrans } from '../components/Transitionprovider.jsx'
+
 import { useState } from 'react'
 import { getLenis } from '../utils/lenisInstance.js'
 import { useMediaQuery } from 'react-responsive'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const ProductDetails = () => {
   const { name ,db } = useParams()
 
-  console.log(name)
+  const navigate = useNavigate()
   const [complete, setComplete] = useState(false)
-  const { containerRef, goTo, animateIn } = useTrans()
+  const containerRef = useRef()
   const sectionRef = useRef()
   const pinRef = useRef()
   const scrollRef = useRef()
@@ -34,11 +34,13 @@ const ProductDetails = () => {
   else if(db==='seller'){
     data = bestseller.find(product => product.name == name)
   }
+  else if(db=='all'){
+    data = products.find(product => product.name == name)
+  }
   
-console.log(data)
   useEffect(() => {
 
-    animateIn()
+    // animateIn()
     // setTimeout(() => {
     //   setComplete(prev => !prev)
     // }, 1000)
@@ -80,29 +82,26 @@ console.log(data)
           },
         })      
       }, sectionRef)
+      const tl = gsap.timeline()
+         tl.fromTo(containerRef.current, {
+            y: 200,
+            opacity: 0,
+            scale: 0.8,
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+        })
+        tl.to(containerRef.current, {
+            scale: 1,
+            duration: 0.3
+        })
     
-    // gsap.fromTo(vidSection.current, {
-    //   scale: 0.5,
-    //   opacity: 0,
-
-    // },
-    //   {
-    //     scrollTrigger: {
-    //       trigger: vidSection.current,
-    //       start: 'top bottom ',
-    //       end: '40% 60%',
-    //       // markers:true,
-
-    //       scrub: 0.1
-    //     },
-    //     scale: 1,
-    //     opacity: 1,
-    //     ease: 'power3.inOut'
-    //   })
+  
 
     return () => ctx.revert()
                
-      // setComplete(prev => !prev)
+     
     
 
   }, [])
@@ -112,7 +111,9 @@ console.log(data)
       <div ref={pinRef} className="min-h-screen flex flex-col font-suisse">
         <div ref={containerRef}>
           <div className="w-fit bg-blue-500 ml-44 rounded-xl not-md:ml-10 mt-30 py-2 px-4 text-white">
-            <h1 className='back'>Back to Home</h1>
+               <button className='cursor-pointer' onClick={()=>navigate('/')}>
+                            Back To Home 
+                         </button>
           </div>
 
           <div className="flex w-full  h-screen p-1">

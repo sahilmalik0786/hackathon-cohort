@@ -11,7 +11,7 @@ import TextEffect from '../components/TextEffect'
 import { useMediaQuery } from 'react-responsive'
 import Section2 from '../components/homesections/Section2'
 import Section3 from '../components/homesections/Section3'
-import { useTrans } from '../components/Transitionprovider'
+
 import Newsletter from '../components/Newsletter'
 import NewsletterArchive from '../components/NewsletterArchive'
 import { getLenis } from '../utils/lenisInstance'
@@ -27,7 +27,8 @@ const Home = () => {
   const test = useRef()
   // gsap.registerPlugin(ScrollTrigger)
   // const { DarkTheme, toggleTheme } = useTheme()
-  const { containerRef, goTo, animateIn } = useTrans();
+  // const { containerRef, goTo, animateIn } = useTrans();
+  const containerRef = useRef()
   
   const isMobile = useMediaQuery({
     query: '(max-width:650px)'
@@ -37,7 +38,7 @@ const Home = () => {
 
   useEffect(() => {
     // ScrollSmoother.create({
-animateIn()
+// animateIn()
 const lenis = getLenis();
 
   // Delay to allow animateIn() to finish and DOM to fully render
@@ -46,7 +47,7 @@ const lenis = getLenis();
 
     if (lenis) {
       lenis.resize();
-      lenis.scrollTo(0, { immediate: true });
+      // lenis.scrollTo(0, { immediate: true });
     }
  ScrollTrigger.refresh()
      // re-evaluate all scroll triggers
@@ -57,7 +58,21 @@ const lenis = getLenis();
   }, []);
 
   useGSAP(() => {
-
+    const tl = gsap.timeline()
+    tl.fromTo(containerRef.current ,{
+      y:100,
+      opacity:0,
+      scale:0.9
+    },{
+      y:0,
+      opacity:1,
+      duration:0.3,
+      ease:'power2.inOut'
+    })
+    tl.to(containerRef.current,{
+      scale:1,
+      duration:0.2
+    })
 //  ScrollTrigger.refresh()
     gsap.to(test.current, {
 

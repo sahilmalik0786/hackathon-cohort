@@ -14,15 +14,15 @@ export default function AppLayout() {
   const {DarkTheme} = useTheme()
 
   return (
-    <div id='lenis-root' className={`w-full h-screen  ${DarkTheme && 'dark'}`}>
+    <div  className={`w-fullh-screen  ${DarkTheme && 'dark'}`}>
 
-  <TransitionProvider>
+
 
       <Scene />
       <Outlet />
      
       
-  </TransitionProvider>
+
 
     </div>
    

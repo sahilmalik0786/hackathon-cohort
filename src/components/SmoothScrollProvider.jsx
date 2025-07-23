@@ -10,7 +10,7 @@ const SmoothScrollProvider = ({ children }) => {
   useEffect(() => {
     const lenis = new Lenis({
       smooth: true,
-      lerp: 0.06,
+      lerp: 0.09,
       direction: 'vertical',
     });
 
@@ -24,7 +24,7 @@ const SmoothScrollProvider = ({ children }) => {
 
     requestAnimationFrame(raf);
 
-    ScrollTrigger.scrollerProxy('#lenis-root', {
+    ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
         return arguments.length ? lenis.scrollTo(value) : window.scrollY;
       },
