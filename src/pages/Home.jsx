@@ -14,6 +14,7 @@ import Section3 from '../components/homesections/Section3'
 import { useTrans } from '../components/Transitionprovider'
 import Newsletter from '../components/Newsletter'
 import NewsletterArchive from '../components/NewsletterArchive'
+import { getLenis } from '../utils/lenisInstance'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -37,15 +38,32 @@ const Home = () => {
   useEffect(() => {
     // ScrollSmoother.create({
 animateIn()
+const lenis = getLenis();
+
+  // Delay to allow animateIn() to finish and DOM to fully render
+  const timer = setTimeout(() => {
+    // window.scrollTo(0, 0); // reset scroll to top
+
+    if (lenis) {
+      lenis.resize();
+      lenis.scrollTo(0, { immediate: true });
+    }
+ ScrollTrigger.refresh()
+     // re-evaluate all scroll triggers
+  }, 600); // match animateIn() duration (0.7s)
+    // re-evaluate all scroll triggers
+
+  return () => clearTimeout(timer);
   }, []);
 
   useGSAP(() => {
 
-
+//  ScrollTrigger.refresh()
     gsap.to(test.current, {
 
       scrollTrigger: {
         trigger: '.page2',
+        
         // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
@@ -78,6 +96,7 @@ animateIn()
     }, {
       scrollTrigger: {
         trigger: '.page3',
+       
         // markers: true,
         start: 'top bottom ',
         end: 'center 60%',
@@ -117,7 +136,7 @@ animateIn()
             </div>
           </div>
           <div className='w-full '>
-            <h1 ref={test} className='md:text-[18rem] text-7xl dark:text-black text-white md:w-full md:text-center  p-1.5  font-suisse not-md:mb-10'>
+            <h1 ref={test} className='md:text-[18rem] text-7xl dark:text-black text-white md:w-full md:text-center    font-suisse not-md:mb-10'>
               <TextEffect data="Lttstore.com"
                 stagger={0.05}
                 duration={0.6}

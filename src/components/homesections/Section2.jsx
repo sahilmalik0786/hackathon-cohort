@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useRef, useEffect } from 'react';
 import ProductsCard from '../ProductsCard';
+import { bestproducts } from '../../services/productsData/screwdrivers';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -87,7 +88,7 @@ const Section2 = () => {
            trigger: productSection.current,
           start: 'top 70%',
           end: '30% center',
-          markers:true,
+          // markers:true,
           scrub: 0.4,
        },
        x: 0,
@@ -107,23 +108,25 @@ const Section2 = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="h-full w-full rounded-md overflow-hidden">
+    <div ref={sectionRef} className="h-full w-full   rounded-md overflow-hidden">
       <div className="flex flex-col h-full w-full">
         <div className="h-fit flex self-center p-2">
           <h2
             ref={headingRef}
-            className="uppercase text-sm py-1 px-2 rounded-xl dark:bg-red-500 dark:text-white bg-red-400"
+            className="uppercase text-sm py-1 px-2 rounded-xl not-md:mt-5 dark:bg-red-500 dark:text-white bg-red-400"
           >
             what we offer
           </h2>
         </div>
 
         <div ref={productSection} className="w-full   h-full flex flex-col gap-20 justify-end">
-          <div className="f-pro flex justify-around">
+          <div className="f-pro  not-md:flex-nowrap  overflow-x-scroll overflow-y-hidden items-center p-3 snap-x snap-mandatory  gap-2 not-md:shrink-0 flex justify-around ">
             {/* Attach each card’s ref via addProductRef */}
-            <ProductsCard ref={addProductRef}/>
-            <ProductsCard ref={addProductRef} />
-            <ProductsCard ref={addProductRef} />
+           {bestproducts?.map((e ,i )=>{
+            return <ProductsCard ref={addProductRef} db={'featured'} key={i} data={e}/>
+
+           })}
+          
           </div>
 
           <div className="h-32 p-1 flex overflow-hidden whitespace-nowrap">
@@ -140,7 +143,7 @@ const Section2 = () => {
                 </filter>
               </svg>
               {[...Array(2)].map((_, i) => (
-                <h1 key={i} className="text-8xl pr-8 dark:text-black text-white">
+                <h1 key={i} className="text-8xl not-md:text-3xl pr-8 dark:text-black text-white">
                   FEATURED-PRODUCTS FEATURED-PRODUCTS FEATURED-PRODUCTS FEATURED-PRODUCTS
                 </h1>
               ))}

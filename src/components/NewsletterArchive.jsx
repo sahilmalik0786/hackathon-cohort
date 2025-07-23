@@ -13,7 +13,7 @@ const NewsletterArchive = () => {
             trigger:'.cols-p',
             start:'top center',
             end:'center center',
-            markers:true,
+            // markers:true,
             scrub:0.3
         },
         y:0,
@@ -24,7 +24,7 @@ const NewsletterArchive = () => {
             trigger:'.cols-p',
             start:'top center',
             end:'center center',
-            markers:true,
+            // markers:true,
             scrub:0.3
         },
         y:0,
@@ -34,7 +34,7 @@ const NewsletterArchive = () => {
             trigger:'.cols-p',
             start:'top center',
             end:'center center',
-            markers:true,
+            // markers:true,
             scrub:0.3,
            
         },

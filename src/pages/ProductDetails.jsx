@@ -3,19 +3,22 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { useGSAP } from '@gsap/react'
-import CustomytEmbed from '../components/CustomytEmbed'
-import { products } from '../services/productsData/screwdrivers.js'
+import { bestproducts , bestseller} from '../services/productsData/screwdrivers.js'
 import { RiAccountBox2Fill } from '@remixicon/react'
 import { useTrans } from '../components/Transitionprovider.jsx'
 import { useState } from 'react'
 import { getLenis } from '../utils/lenisInstance.js'
 import { useMediaQuery } from 'react-responsive'
+import { useParams } from 'react-router-dom'
 
-gsap.registerPlugin(ScrollTrigger , useGSAP)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const ProductDetails = () => {
-  const [complete , setComplete]  = useState(false)
-  const {containerRef , goTo , animateIn } = useTrans()
+  const { name ,db } = useParams()
+
+  console.log(name)
+  const [complete, setComplete] = useState(false)
+  const { containerRef, goTo, animateIn } = useTrans()
   const sectionRef = useRef()
   const pinRef = useRef()
   const scrollRef = useRef()
@@ -23,143 +26,141 @@ const ProductDetails = () => {
   const isMobile = useMediaQuery({
     query: '(max-width:650px)'
   })
-    const data= products.find(screw => screw.name == 'Transparent Screwdriver'
-    )
-    console.log(complete)
-
+  let data ;
+  if(db === 'featured'){
+     data = bestproducts.find(product => product.name == name
+  )
+  }
+  else if(db==='seller'){
+    data = bestseller.find(product => product.name == name)
+  }
+  
+console.log(data)
   useEffect(() => {
 
-     animateIn()
-     setTimeout(()=>{
-      setComplete(prev => !prev)
-     },1000)
-     
-  const lenis = getLenis();
+    animateIn()
+    // setTimeout(() => {
+    //   setComplete(prev => !prev)
+    // }, 1000)
+
+    const lenis = getLenis();
     if (lenis) {
-    // Make sure DOM is fully rendered
-  setTimeout(() => {
-    lenis?.resize();
-    lenis?.scrollTo(0, { immediate: true });
-    ScrollTrigger?.refresh();
-  }, 100);; // small delay to ensure DOM is rendered
+      // Make sure DOM is fully rendered
+      setTimeout(() => {
+        lenis?.resize();
+        lenis?.scrollTo(0, { immediate: true });
+        ScrollTrigger?.refresh();
+      }, 100);; // small delay to ensure DOM is rendered
 
     }
-  if(!isMobile){
+  
+    
+    
+      const ctx = gsap.context(() => {
+        const scrollEl = scrollRef.current
 
-    const ctx = gsap.context(() => {
-      const scrollEl = scrollRef.current
 
-      
-      scrollEl.scrollTop = 0
+        scrollEl.scrollTop = 0
 
-      // calculate scroll height
-      const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight
+        // calculate scroll height
+        const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight
 
-      // animate scrollTop of .product-info using ScrollTrigger
-      gsap.to(scrollEl, {
-        scrollTop: scrollHeight,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: () => `+=${scrollHeight}`,
-          scrub: true,
-          pin: pinRef.current,
-          // markers:true
-        },
-      })
-    }, sectionRef)
-  }
-    gsap.fromTo(vidSection.current , {
-      scale:0.5,
-      opacity:0,
-      
-    },
-  {
-    scrollTrigger:{
-      trigger:vidSection.current,
-         start: 'top bottom ',
-        end: '40% 60%',
-      // markers:true,
+        // animate scrollTop of .product-info using ScrollTrigger
      
-      scrub:0.1
-    },
-    scale:1,
-    opacity:1,
-    ease:'power3.inOut'
-  })
+         gsap.to(scrollEl, {
+          scrollTop: scrollHeight,
+          ease: 'none',
+          scrollTrigger: {
+            // trigger: sectionRef.current,
+            start: 'top top',
+            end: () => `+=${scrollHeight}`,
+            scrub: true,
+            pin: pinRef.current,
+            // markers:true
+          },
+        })      
+      }, sectionRef)
+    
+    // gsap.fromTo(vidSection.current, {
+    //   scale: 0.5,
+    //   opacity: 0,
 
-    return () => {ctx.revert()
-      setComplete(prev => !prev)
-    }
-      
+    // },
+    //   {
+    //     scrollTrigger: {
+    //       trigger: vidSection.current,
+    //       start: 'top bottom ',
+    //       end: '40% 60%',
+    //       // markers:true,
+
+    //       scrub: 0.1
+    //     },
+    //     scale: 1,
+    //     opacity: 1,
+    //     ease: 'power3.inOut'
+    //   })
+
+    return () => ctx.revert()
+               
+      // setComplete(prev => !prev)
+    
+
   }, [])
 
-  return ( 
+  return (
     <div ref={sectionRef}>
       <div ref={pinRef} className="min-h-screen flex flex-col font-suisse">
         <div ref={containerRef}>
-        <div  className="w-fit bg-blue-500 ml-44 rounded-xl not-md:ml-10 mt-30 py-2 px-4 text-white">
-          <h1 className='back'>Back to Home</h1>
-        </div>
+          <div className="w-fit bg-blue-500 ml-44 rounded-xl not-md:ml-10 mt-30 py-2 px-4 text-white">
+            <h1 className='back'>Back to Home</h1>
+          </div>
 
-        <div  className="flex w-full  h-screen p-1">
-          <div className="w-44 not-md:hidden h-96 mt-4"></div>
-          <div className="flex w-full not-md:flex-col p-4 gap-4 overflow-hidden">
+          <div className="flex w-full  h-screen p-1">
+            <div className="w-44 not-md:hidden h-96 mt-4"></div>
+            <div className="flex w-full not-md:flex-col p-4 gap-4 overflow-hidden">
 
 
-            <div className="w-1/2 not-md:w-full  h-[400px]  rounded-2xl dark:bg-gradient-to-tr dark:from-slate-300 dark:to-slate-300 dark:via-white bg-gradient-to-tr from-slate-600 to-slate-800 via-black ">
-              <img
-                className="w-full h-full object-contain"
-                src="https://ik.imagekit.io/sf0ybmgwy/lttsotre/screwdrivers/transparent/Transparent_1_816b64e4-e995-4bb2-a58a-3ac9c3fb7c23.png?updatedAt=1753114480645"
-                alt="Product"
-              />
-            </div>
+              <div className="w-1/2 not-md:w-full not-md:h-[350px] h-[500px]  rounded-2xl dark:bg-gradient-to-tr dark:from-slate-300 dark:to-slate-300 dark:via-white bg-gradient-to-tr from-slate-600 to-slate-800 via-black ">
+                <img
+                  className="w-full h-full object-contain"
+                  src={data?.Imgs[0]}
+                  alt="Product"
+                />
+              </div>
 
-            <div
-              ref={scrollRef}
-              className="w-1/2 not-md:w-full  product-info p-4 rounded-2xl h-3/4 scrollbar-hide"
-              style={{ overflowY: 'scroll' }}
-            >
-              <div className="h-fit">
-               <div className='h-fit dark:text-black text-white'>
-                 <h2 className="text-4xl  top-0 font-bold w-56 mb-4">{data?.name}</h2>
-                {/* <h3 className='text-lg font-thin text-left p-2'>{data?.description}</h3> */}
-                <h3 className='text-xl'>{data?.price}</h3>
-               </div>
-               <div className=' mt-5  h-fit w-full p-1 dark:text-white dark:bg-gradient-to-br dark:via-black dark:from-gray-600 dark:to-gray-800 text-black bg-gradient-to-br from-gray-300 via-white/90   to-gray-400 rounded'>
-                <h1 className='text-2xl dark:bg-gradient-to-br dark:via-black dark:from-gray-400 dark:to-gray-800  bg-gradient-to-br from-gray-300 via-white   to-gray-400 rounded p-1 sticky inset-0 flex items-center justify-between mb-3'>Description <span > <RiAccountBox2Fill /> </span></h1>
-                 <p className='leading-7 p-1'>{data?.description}</p>
-               </div>
-               <div className=' mt-5  h-fit w-full p-1 dark:text-white dark:bg-gradient-to-br dark:via-black dark:from-gray-600 dark:to-gray-800 text-black bg-gradient-to-br from-gray-300 via-white/90   to-gray-400 rounded'>
-                <h1 className='text-2xl dark:bg-gradient-to-br dark:via-black dark:from-gray-400 dark:to-gray-800  bg-gradient-to-br from-gray-300 via-white   to-gray-400 rounded p-1 sticky inset-0 flex items-center justify-between mb-3'>Product info <span > <RiAccountBox2Fill /> </span></h1>
-                  <span className='p-1'>
-                    whatsincluded:
-                    {data?.ProductInfo.whatsincluded.map((e , i)=>{
-                   return <span key={i}><li>{e}</li></span>
-                  })}
-                  </span>
-               </div>
+              <div
+                ref={scrollRef}
+                className="w-1/2 not-md:w-full  product-info p-4 rounded-2xl h-3/4 scrollbar-hide"
+                style={{ overflowY: 'scroll' }}
+              >
+                <div className="h-fit">
+                  <div className='h-fit dark:text-black text-white'>
+                    <h2 className="text-4xl  top-0 font-bold w-56 mb-4">{data?.name}</h2>
+                    {/* <h3 className='text-lg font-thin text-left p-2'>{data?.description}</h3> */}
+                    <h3 className='text-xl'>{data?.price}</h3>
+                  </div>
+                  <div className=' mt-5  h-fit w-full p-1 dark:text-white dark:bg-gradient-to-br dark:via-black dark:from-gray-600 dark:to-gray-800 text-black bg-gradient-to-br from-gray-300 via-white/90   to-gray-400 rounded'>
+                    <h1 className='text-2xl dark:bg-gradient-to-br dark:via-black dark:from-gray-400 dark:to-gray-800  bg-gradient-to-br from-gray-300 via-white   to-gray-400 rounded p-1 sticky inset-0 flex items-center justify-between mb-3'>Description <span > <RiAccountBox2Fill /> </span></h1>
+                    <p className='leading-7 p-1'>{data?.description}</p>
+                  </div>
+                  <div className=' mt-5  h-fit w-full p-1 dark:text-white dark:bg-gradient-to-br dark:via-black dark:from-gray-600 dark:to-gray-800 text-black bg-gradient-to-br from-gray-300 via-white/90   to-gray-400 rounded'>
+                    <h1 className='text-2xl dark:bg-gradient-to-br dark:via-black dark:from-gray-400 dark:to-gray-800  bg-gradient-to-br from-gray-300 via-white   to-gray-400 rounded p-1 sticky inset-0 flex items-center justify-between mb-3'>Product info <span > <RiAccountBox2Fill /> </span></h1>
+                    <span className='p-1'>
+                      whatsincluded:
+                      {data?.ProductInfo.whatsincluded.map((e, i) => {
+                        return <span key={i}><li>{e}</li></span>
+                      })}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-     </div>
-      
+
       </div>
-         <div ref={vidSection} className={`w-full h-screen flex  items-center flex-col `}>
-          <h1 className='text-2xl dark:text-black text-white capitalize  '>
-            meet the transparent Screwdriver
-          </h1>
-       
      
-         {complete &&  <CustomytEmbed  videoId='xKoE-pJxwx8'/>}
-       
-        </div>
-          <div className='w-full h-screen bg-red-900 p-1'>
-sss
-        </div>
-        <div className='w-full h-screen bg-blue-800 p-2'></div>
+
     </div>
   )
 }

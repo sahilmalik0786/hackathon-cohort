@@ -13,13 +13,14 @@ const TransitionProvider = ({ children }) => {
   const navigate = useNavigate();
   const containerRef = useRef(null);
           const lenis = getLenis();
+          
  
 // const [first, setfirst] = useState(second)
   const goTo = (path) => {
     const tl = gsap.timeline({
       onComplete: () => {
         navigate(path); // route change AFTER animation
-       
+        lenis.resize()
  
       },
     });
@@ -36,8 +37,8 @@ const TransitionProvider = ({ children }) => {
   const animateIn = () => {
     gsap.fromTo(
       containerRef.current,
-      { opacity: 0, y: 500 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
+      { opacity: 0, y: 200  ,scale:0.3 },
+      { opacity: 1, y: 0, scale:1, duration: 0.7, ease: 'power2.inOut' }
     );
   };
 

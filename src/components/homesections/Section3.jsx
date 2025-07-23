@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useRef, useEffect } from 'react';
 import ProductsCard from '../ProductsCard';
+import { bestseller } from '../../services/productsData/screwdrivers';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -11,7 +12,7 @@ const Section2 = () => {
   const marqueeRef   = useRef(null);
   const tweenRef     = useRef(null);
   const section3Ref   = useRef(null);
-  const productSection = useRef(null)
+  const productsSection = useRef(null)
 
   // 1) Set up an array container for product refs
   const productRefs = useRef([]);
@@ -68,10 +69,10 @@ const Section2 = () => {
 
       }, {
        scrollTrigger:{
-           trigger: productSection.current,
+           trigger: productsSection.current,
           start: 'top 70%',
           end: '30% center',
-          markers:true,
+          // markers:true,
           scrub: 0.4,
        },
        x: 0,
@@ -95,12 +96,13 @@ const Section2 = () => {
       <div className="flex flex-col h-full w-full">
       
 
-        <div ref={productSection} className="w-full  h-full flex flex-col gap-20 justify-end">
-          <div className="f-pro flex justify-around">
+        <div ref={productsSection} className="w-full  h-full flex flex-col gap-20 not-md:justify-center justify-end">
+          <div className="f-pro  not-md:flex-nowrap  overflow-x-scroll overflow-y-hidden items-center p-3 snap-x snap-mandatory  gap-2 not-md:shrink-0 flex justify-around">
             {/* Attach each card’s ref via addProductRef */}
-            <ProductsCard ref={addProductRef}/>
-            <ProductsCard ref={addProductRef} />
-            <ProductsCard ref={addProductRef} />
+         {bestseller.map((e,i)=>{
+          return <ProductsCard ref={addProductRef} data={e} db={'seller'} key={i}/>
+
+         })}
           </div>
 
           <div className="h-32 p-1 flex overflow-hidden whitespace-nowrap">

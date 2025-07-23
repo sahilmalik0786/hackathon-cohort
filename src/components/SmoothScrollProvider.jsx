@@ -24,7 +24,7 @@ const SmoothScrollProvider = ({ children }) => {
 
     requestAnimationFrame(raf);
 
-    ScrollTrigger.scrollerProxy(document.body, {
+    ScrollTrigger.scrollerProxy('#lenis-root', {
       scrollTop(value) {
         return arguments.length ? lenis.scrollTo(value) : window.scrollY;
       },
@@ -39,7 +39,7 @@ const SmoothScrollProvider = ({ children }) => {
       pinType: document.body.style.transform ? 'transform' : 'fixed',
     });
 
-    ScrollTrigger.refresh();
+     ScrollTrigger.refresh();
 
     return () => {
       lenis.destroy();
