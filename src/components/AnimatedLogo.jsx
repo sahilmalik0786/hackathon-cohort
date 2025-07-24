@@ -26,7 +26,7 @@ const AnimatedLogo = ({ onComplete }) => {
 
             const tl = gsap.timeline({
                 onComplete: () => {
-
+                    document.body.style.overflowY ='scroll'
                     if (onComplete) onComplete();
                 },
             });

@@ -100,7 +100,7 @@ useEffect(() => {
   
   <>
   <Navbar />
-  <div id='over' className={`h-screen w-screen  fixed inset-0  bg-gradient-to-br from-neutral-700 to-primary-dark from-0% overflow-hidden pointer-events-none dark:bg-gradient-to-br dark:from-neutral-200 dark:to-neutral-50 dark:from-0% dark:mix-blend-normal`}>
+  <div  className={`h-screen w-screen  fixed inset-0  bg-gradient-to-br from-neutral-700 to-primary-dark from-0% overflow-hidden pointer-events-none dark:bg-gradient-to-br dark:from-neutral-200 dark:to-neutral-50 dark:from-0% dark:mix-blend-normal`}>
    
   </div>
   <Canvas

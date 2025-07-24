@@ -32,7 +32,7 @@ const [showIntro, setShowIntro] = useState(true);
   return (
 <>
      {showIntro && <AnimatedLogo onComplete={() => setShowIntro(false)} />}
-      {!showIntro && (  <div  className={`w-full    ${DarkTheme && 'dark'}`}>
+      {!showIntro && (  <div  className={`w-full  h-screen  ${DarkTheme && 'dark'}`}>
      
 
 

@@ -128,7 +128,7 @@ const lenis = getLenis();
   
     <div ref={containerRef} className='relative  w-full '>
       
-      <div  className=' w-full  absolute scrollbar-hide  overflow-x-hidden'  >
+      <div  className=' w-full  absolute scrollbar-hide overflow-x-hidden'  >
 
         <div className=' w-full h-screen flex flex-col justify-end not-md:gap-10'>
           <div className='w-full flex not-md:h-full h-fit md:p-10 not-md:flex-col md:mb-10 not-md:justify-end '>
