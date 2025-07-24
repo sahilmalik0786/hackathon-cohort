@@ -66,12 +66,12 @@ const lenis = getLenis();
     },{
       y:0,
       opacity:1,
-      duration:0.3,
+      duration:0.4,
       ease:'power2.inOut'
     })
     tl.to(containerRef.current,{
       scale:1,
-      duration:0.2
+      duration:0.4
     })
 //  ScrollTrigger.refresh()
     gsap.to(test.current, {
@@ -126,7 +126,7 @@ const lenis = getLenis();
   return (
     <>
   
-    <div ref={containerRef} className='relative  w-full'>
+    <div ref={containerRef} className='relative  w-full '>
       
       <div  className=' w-full  absolute scrollbar-hide  overflow-x-hidden'  >
 

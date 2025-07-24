@@ -99,10 +99,20 @@ function ImagePlane({ url, position = [0, 0, 0], size = [1, 1] }) {
                 store.com
             </h1>
         </div>
-        <div className='flex gap-5 not-md:gap-2'>
+        <div className='flex gap-5 not-md:gap-2 dark:text-black text-white'>
+          <div className='flex  items-center justify-center cursor-default'>
+            <button className='text-sm not-md:text-xs dark:text-black text-white before:content-[""] before:w-0 before:h-1 dark:before:bg-black before:bg-white before:absolute relative before:bottom-0 befor hover:before:w-full before:transition-all before:duration-200 overflow-hidden cursor-pointer active:scale-95' onClick={()=>navigate('/login')}> 
+              Login
+              </button>
+              /
+              <button className='text-sm not-md:text-xs dark:text-black text-white before:content-[""] before:w-0 before:h-1 dark:before:bg-black before:bg-white before:absolute relative before:bottom-0 befor hover:before:w-full before:transition-all before:duration-200 overflow-hidden cursor-pointer active:scale-95 ' onClick={()=>navigate('/signup')}>
+                Signup
+              </button>
+          </div>
              <button onClick={()=>navigate('/products') } className='dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark px-4 hover:shadow-sm dark:shadow-gray-700 shadow-black active:scale-95 cursor-pointer transition-all font-suisse font-normal tracking-wide py-1 rounded-lg not-md:text-xs'>
                 Shop Now
              </button>
+             
               <button className='  flex items-center cursor-pointer mr-2' onClick={toggleTheme}>
              {!DarkTheme ? <RiMoonFill ref={moon} color='white' className='moon'/> : <RiSunFill className='sun'/>}
         </button>

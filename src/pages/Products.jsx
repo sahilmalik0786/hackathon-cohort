@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 
 const Products = () => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const productRefs = useRef([]);
     productRefs.current = []; // reset on each render
 
@@ -58,24 +58,27 @@ const Products = () => {
 
         )
     }, [])
-    useGSAP(() => {
 
-    })
     return (
 
-        <div ref={proRef} className="lenis relative dark:text-black text-white h-screen ">
-            <div className="flex min-h-screen">
+        <div ref={proRef} className="lenis relative dark:text-black overflow-y-auto scrollbar-hide text-white h-screen ">
+            <div className="flex min-h-screen ">
                 {/* Sticky Sidebar */}
                 <aside className="sticky top-0 h-screen  md:w-64  p-4 flex-shrink-0">
-                    <div className='mt-30'>
-                        <h2 className="text-xl  font-bold mb-4">FILTER:</h2>
-                        <p>Filter items here</p>
+                    <div className='md:mt-32 mt-28 md:ml-5'>
+                        <button className='bg-gradient-to-tr from-slate-300 to-slate-300 via-white dark:bg-gradient-to-tr dark:from-slate-600 dark:to-slate-800 dark:via-black px-3 py-1 rounded-md dark:text-white text-black cursor-pointer active:scale-95 transition-all duration-300 not-md:text-sm' onClick={()=>{
+                            navigate('/')
+                        }}>
+                            Back to Home
+
+                        </button>
+                        
                     </div>
                 </aside>
 
                 {/* Scrollable Content (Actually scrolls with Lenis) */}
-                <main className="flex-1 p-6  ">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 mt-30 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <main className="flex-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 mt-32 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                         {
                             products.map((e, i) => (
                                 <ProductsCard data={e} db={'all'}ref={addProductRef} />

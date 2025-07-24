@@ -3,14 +3,41 @@ import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { setLenis } from '../utils/lenisInstance'; // adjust path
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger ,ScrollSmoother);
 
 const SmoothScrollProvider = ({ children }) => {
+
+   const wrapperRef = useRef(null);
+  const contentRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (!ScrollSmoother.get()) {
+  //     ScrollSmoother.create({
+  //       wrapper: wrapperRef.current,
+  //       content: contentRef.current,
+  //       smooth: 2,
+  //       effects: true,
+  //     });
+  //   }
+
+  //   return () => {
+  //     const smoother = ScrollSmoother.get();
+  //     if (smoother) smoother.kill();
+  //   };
+  // }, []);
+  // useEffect(()=>{
+  //   ScrollSmoother.create({
+  //     content:'#'
+  //   })
+  // })
   useEffect(() => {
     const lenis = new Lenis({
       smooth: true,
-      lerp: 0.09,
+      lerp: 0.08,
       direction: 'vertical',
     });
 
@@ -47,7 +74,12 @@ const SmoothScrollProvider = ({ children }) => {
     };
   }, []);
 
-  return <>{children}</>;
+  return   (
+ <>
+        {children}
+        </>
+  )
+            
 };
 
 export default SmoothScrollProvider;
