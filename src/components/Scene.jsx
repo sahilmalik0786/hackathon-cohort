@@ -49,7 +49,7 @@ const Scene = () => {
     const isMobile = useMediaQuery({
     query: '(max-width:650px)'
   })
-  const modelRef = useRef()
+  // const modelRef = useRef()
 
   const config = {
     fluidColor: color,
@@ -61,39 +61,7 @@ const Scene = () => {
   }
 
 useEffect(() => {
-  if (!modelRef.current) return;
-
-  gsap.to(modelRef.current.rotation, {
-    y: 20,
-    // x:20,
-    // z:10,
-    // skewX:22,
-    duration:10,
-    repeat:-1,
-    yoyo:true,
-    ease:'power2.inOut'
-   
-    // scrollTrigger: {
-    //   trigger: '.page2',
-    //   start: 'top center',
-    //   end: 'bottom center',
-    //   // scrub: true,
-    //   markers:true,
-    // },
-  });
-
-  gsap.to(modelRef.current.position, {
-    x: 1.2,
-    y: 1.2,
-    z: 1.2,
-    scrollTrigger: {
-      trigger: '.page2',
-      start: 'top center',
-      end: 'bottom center',
-      scrub: true,
-     
-    },
-  });
+ 
 }, []);
 
   return (

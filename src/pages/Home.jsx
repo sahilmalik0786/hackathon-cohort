@@ -140,7 +140,7 @@ const lenis = getLenis();
                 Quality over quantity — every time.
               </h1>
             </div>
-            <div className='w-1/3 not-md:w-3/4 dark:bg-red-200/20 not-md:pl-10 pt-1'>
+            <div className='w-1/3 not-md:w-3/4  not-md:pl-10 pt-1'>
               <h1 className='text-3xl not-md:text-lg  font-suisse text-white tracking-wideest dark:text-black '>
                 <TextEffect data="Upgrade your gear with tools that aren’t just cool — they’re Linus-tested. Join millions who trust LTT gear to build repair, and flex on cable management."
                   stagger={0.01}

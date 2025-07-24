@@ -10,6 +10,8 @@ import { useState } from 'react'
 import { getLenis } from '../utils/lenisInstance.js'
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate, useParams } from 'react-router-dom'
+import Newsletter from '../components/Newsletter.jsx'
+import NewsletterArchive from '../components/NewsletterArchive.jsx'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -110,10 +112,13 @@ const ProductDetails = () => {
     <div ref={sectionRef}>
       <div ref={pinRef} className="min-h-screen flex flex-col font-suisse">
         <div ref={containerRef}>
-          <div className="w-fit bg-blue-500 ml-44 rounded-xl not-md:ml-10 mt-30 py-2 px-4 text-white">
-               <button className='cursor-pointer' onClick={()=>navigate('/')}>
-                            Back To Home 
-                         </button>
+          <div className="w-fit  ml-44  not-md:ml-10 mt-30 py-2 px-4">
+            <button className='bg-gradient-to-tr from-slate-300 to-slate-300 via-white dark:bg-gradient-to-tr dark:from-slate-600 dark:to-slate-800 dark:via-black px-3 py-1 rounded-md dark:text-white text-black cursor-pointer active:scale-95 transition-all duration-300 not-md:text-sm' onClick={() => {
+                navigate('/')
+              }}>
+                Back to Home
+
+              </button>
           </div>
 
           <div className="flex w-full  h-screen p-1">
@@ -157,8 +162,10 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+          
         </div>
-
+            <NewsletterArchive />
+ 
       </div>
      
 
