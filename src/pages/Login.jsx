@@ -36,8 +36,8 @@ const Login = () => {
       <div ref={containerRef} className='flex items-end not-md:flex-col w-full h-screen  justify-end'>
         <div className='w-2/5 not-md:w-full not-md:h-2/5 h-full  flex items-center justify-center bg-slate-300 p-1'>
        
-           <div className='w-3/4 h-3/5 flex gap-10 not-md:gap-5 items-center flex-col md:ml-30 p-1'>
-            <div className=' w-full not-md:mb-6 flex justify-center '>
+           <div className='w-3/4 h-3/5 flex gap-10 not-md:gap-1 items-center flex-col md:ml-30 p-1'>
+            <div className=' w-full not-md:mb-6 flex not-md:justify-center '>
               <img src={logoimage} alt="logo" />
             </div>
             <div className='w-full '>
