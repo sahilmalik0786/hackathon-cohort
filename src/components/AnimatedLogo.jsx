@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import TextEffect from './TextEffect';
 import { SplitText } from 'gsap/SplitText';
 
 const AnimatedLogo = ({ onComplete }) => {
@@ -10,7 +9,6 @@ const AnimatedLogo = ({ onComplete }) => {
     const headingRef = useRef()
     gsap.registerPlugin(SplitText)
 
-    // Ensure DOM is painted before measuring SVG paths
     useEffect(() => {
         const id = requestAnimationFrame(() => setReady(true));
         return () => cancelAnimationFrame(id);
@@ -49,13 +47,9 @@ const AnimatedLogo = ({ onComplete }) => {
 
             })
             tl.to(wrapperRef.current, {
-                // autoAlpha: 0,
                 y: -3000,
-
                 borderRadius: "150px",
-                // y:3000,
                 duration: 1,
-                // delay: 0.1,
                 ease: 'power1.inOut',
             });
             tl.to(wrapperRef.current, {
@@ -64,15 +58,7 @@ const AnimatedLogo = ({ onComplete }) => {
                 delay: 0.2,
                 ease: 'power1.out'
             })
-        //    tl.fromTo('#over',{
-        //     scale:0.3,
-        //     y:-100,
-        //     duration:0.3
-        //    },{
-        //     scale:1,
-        //     duration:0.8,
-        //     ease:'power2.inOut'
-        //    })
+  
 
 
 

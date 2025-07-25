@@ -12,7 +12,6 @@ import { Fluid } from '@whatisjery/react-fluid-distortion'
 
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from "react";
-import { getLenis } from "../utils/lenisInstance"; 
 
 
 

@@ -1,16 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 import { useGSAP } from '@gsap/react'
 import { bestproducts , bestseller, products} from '../services/productsData/screwdrivers.js'
 import { RiAccountBox2Fill } from '@remixicon/react'
-
-import { useState } from 'react'
 import { getLenis } from '../utils/lenisInstance.js'
-import { useMediaQuery } from 'react-responsive'
 import { useNavigate, useParams } from 'react-router-dom'
-import Newsletter from '../components/Newsletter.jsx'
 import NewsletterArchive from '../components/NewsletterArchive.jsx'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -19,15 +14,12 @@ const ProductDetails = () => {
   const { name ,db } = useParams()
 
   const navigate = useNavigate()
-  const [complete, setComplete] = useState(false)
+
   const containerRef = useRef()
   const sectionRef = useRef()
   const pinRef = useRef()
   const scrollRef = useRef()
-  const vidSection = useRef()
-  const isMobile = useMediaQuery({
-    query: '(max-width:650px)'
-  })
+ 
   let data ;
   if(db === 'featured'){
      data = bestproducts.find(product => product.name == name
@@ -42,19 +34,15 @@ const ProductDetails = () => {
   
   useEffect(() => {
 
-    // animateIn()
-    // setTimeout(() => {
-    //   setComplete(prev => !prev)
-    // }, 1000)
 
     const lenis = getLenis();
     if (lenis) {
-      // Make sure DOM is fully rendered
+
       setTimeout(() => {
         lenis?.resize();
         lenis?.scrollTo(0, { immediate: true });
         ScrollTrigger?.refresh();
-      }, 100);; // small delay to ensure DOM is rendered
+      }, 100);
 
     }
   
@@ -65,22 +53,17 @@ const ProductDetails = () => {
 
 
         scrollEl.scrollTop = 0
-
-        // calculate scroll height
         const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight
 
-        // animate scrollTop of .product-info using ScrollTrigger
      
          gsap.to(scrollEl, {
           scrollTop: scrollHeight,
           ease: 'none',
           scrollTrigger: {
-            // trigger: sectionRef.current,
             start: 'top top',
             end: () => `+=${scrollHeight}`,
             scrub: true,
             pin: pinRef.current,
-            // markers:true
           },
         })      
       }, sectionRef)
@@ -98,14 +81,7 @@ const ProductDetails = () => {
             scale: 1,
             duration: 0.3
         })
-    
-  
-
     return () => ctx.revert()
-               
-     
-    
-
   }, [])
 
   return (

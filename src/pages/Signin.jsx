@@ -65,7 +65,7 @@ const Signin = () => {
                    <h1 className='text-4xl'>Sign Up</h1>
                    <form onSubmit={handleSubmit(onSubmit)}
                      className='  flex flex-col gap-4 w-10/12  not-md:w-11/12 h-fit p-3'>
-                     {/* register your input into the hook by invoking the "register" function */}
+                    
                      <div className='flex bg-slate-50 flex-col p-2 active:scale-95 rounded-xl gap-1  shadow-lg/10 hover:shadow-lg/25 transition-all duration-200'>
                        <label htmlFor="username" className='select-none'>Username </label>
                        <input id='username' {...register("username")} className='outline-none' />
@@ -74,12 +74,10 @@ const Signin = () => {
                        <label htmlFor="emial" className='select-none'>Enter your  Email</label>
                        <input id='email' {...register("email")} className='outline-none' />
                      </div>
-                     {/* include validation with required or other standard HTML validation rules */}
                      <div className='flex bg-slate-50 flex-col p-2 active:scale-95 rounded-xl gap-1  shadow-lg/10 hover:shadow-lg/25 transition-all duration-200'>
                        <label htmlFor="password" className='select-none'>Password</label>
                        <input id='password' {...register("password", { required: true })} className='outline-none' />
                      </div>
-                     {/* errors will return when field validation fails  */}
                      {errors.password && <span>This field is required</span>}
        
                      <button className='bg-gradient-to-tr from-slate-300 to-slate-300 via-white dark:bg-gradient-to-tr dark:from-slate-600 dark:to-slate-800 dark:via-black px-3 py-1 rounded-md w-fit mx-auto dark:text-white text-black cursor-pointer active:scale-95 transition-all duration-300 not-md:text-sm'>

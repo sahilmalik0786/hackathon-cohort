@@ -1,20 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App'; // layout with Scene and Outlet
+import App from '../App'; 
 import Home from '../pages/Home';
 import ProductDetails from '../pages/ProductDetails';
 import Login from '../pages/Login';
 import Signin from '../pages/Signin';
 import Products from '../pages/Products';
 
-// import About from '../pages/About'; // example page
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // App contains <Scene /> and <Outlet />
+    element: <App />, 
     children: [
       {
-        index: true, // route for "/"
+        index: true, 
         element: <Home />,
       },
       {
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
         element:<Products />
       }
 
-      // add more nested routes here
+
     ],
   },
 ]);

@@ -65,22 +65,18 @@ const NewsletterArchive = () => {
     tl.from('.text', {
            
 
-         y:-2000,opacity:0,
+         y:2000,opacity:0,
 
       scrollTrigger:{
         trigger:'.cols-p',
          start: 'top center',
         end: 'center center',
-        // markers:true,
         scrub: 0.2,
 
 
       },
       
-// stagger:0.5,
 
-      // stagger: 0.05,
-      // duration: 1,
 
   },'a')
   
@@ -93,35 +89,15 @@ const NewsletterArchive = () => {
         trigger:'.cols-p',
          start: 'top center',
         end: 'center center',
-        // markers:true,
         scrub: 0.1,
 
 
       },
       
-      
-// stagger:0.5,
 
-      // stagger: 0.05,
-      // duration: 1,
 
   },'a')
-  // tl.from(split.chars,{
 
-  //   x:10,y:20,opacity:0,
-  //   ease:'power3.inOut',
-  //   stagger:1,      scrollTrigger:{
-  //     trigger:'.cols-p',
-  //      start: 'top center',
-  //       end: 'center center',
-  //       // markers:true,
-  //       scrub: true,
-
-  //   },
-  //     onComplete: () => split.revert(),
-    
-  
-  // },'a')
 }, [])
 
 return (

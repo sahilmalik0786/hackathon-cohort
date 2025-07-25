@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 const ProductsCard = forwardRef((props ,ref) => {
   const {data ,db} = props
-  // console.log(data)
-  // Track the GSAP tween so we can cancel it if needed
+
   let hoverTween = null;
  
   const handleMouseMove = (e) => {
@@ -15,7 +14,7 @@ const ProductsCard = forwardRef((props ,ref) => {
     const relX = e.clientX - rect.left - rect.width / 2;
     const relY = e.clientY - rect.top - rect.height / 2;
 
-    const moveX = relX * 0.2; // adjust strength
+    const moveX = relX * 0.2; 
     const moveY = relY * 0.1;
     
 
