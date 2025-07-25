@@ -107,7 +107,7 @@ return (
     <div className='bg-slate-300 cols flex justify-end'><div className='mt-5 arrow'><RiArrowUpLongFill /></div></div>
     <div className='bg-slate-300 cols2 flex justify-end'><div className='mt-5 arrow'><RiArrowUpLongFill /></div></div>
     <div className='w-full absolute inset-0 flex  items-center p-10'>
-      <div className='flex not-md:flex-col items-center not-md:gap-6'>
+      <div className='flex not-md:flex-col items-center gap-5 not-md:gap-6'>
         <h1 className='text-2xl not-md:text-xl w-10/12 not-md:w-full text-gray-700 text'>
           Welcome to the official merch store of Linus Tech Tips! We create high-quality, tech-inspired gear designed for fans, by fans. From our legendary water bottles to ultra-comfy hoodies, every product is tested to survive even the most brutal "accidental" drops (we’re looking at you, Linus).
 
