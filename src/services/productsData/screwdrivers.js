@@ -8,7 +8,7 @@ export const bestproducts = [
             dimensions: ['-Screwdriver Length (bit storage closed): 8.4” / 213mm', '- Screwdriver Length (bit storage open): 10.2” / 260mm', '- Shaft Length: 3.2” / 82.2mm', 'Width: 1.4” / 35mm', 'Weight: 0.45lbs'],
             material: ['Titan', 'Delrin 500', 'Acetal', 'Zinc', 'Stainless Steel', 'Passivated 303 Stainless Steel', 'S2 Steel']
         },
-        Imgs: ['https://ik.imagekit.io/sf0ybmgwy/lttsotre/screwdrivers/transparent/Transparent_1_816b64e4-e995-4bb2-a58a-3ac9c3fb7c23.png?updatedAt=1753114480645',]
+        Imgs: ['https://ik.imagekit.io/sf0ybmgwy/Transparent_1_816b64e4-e995-4bb2-a58a-3ac9c3fb7c23.png',]
 
     },
 
